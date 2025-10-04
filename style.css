@@ -204,3 +204,207 @@
         .click-box:active {
             transform: scale(0.9);
         }
+        /* Tabs */
+        .tabs-container {
+            margin-top: 30px;
+        }
+
+        .tab-buttons {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid var(--border-color);
+        }
+
+        .tab-btn {
+            background: none;
+            border: none;
+            padding: 12px 24px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-bottom: 3px solid transparent;
+            transition: all 0.3s ease;
+        }
+
+        .tab-btn:hover {
+            color: var(--primary-color);
+        }
+
+        .tab-btn.active {
+            color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
+        }
+
+        .tab-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        /* FAQ */
+        .faq-container {
+            margin-top: 20px;
+        }
+
+        .faq-item {
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .faq-question {
+            width: 100%;
+            background: var(--bg-color);
+            border: none;
+            padding: 16px 20px;
+            text-align: left;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .faq-question:hover {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: var(--card-bg);
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+        }
+
+        .faq-answer p {
+            padding: 16px 20px;
+            color: var(--text-muted);
+        }
+
+        /* Game */
+        .game-container {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .game-instructions {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            color: var(--text-muted);
+        }
+
+        .game-stats {
+            margin: 20px 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .game-stats p {
+            margin: 8px 0;
+        }
+
+        .high-score {
+            color: var(--success-color);
+        }
+
+        .game-click-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: white;
+            border: none;
+            padding: 40px 60px;
+            border-radius: 16px;
+            font-size: 2rem;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: 20px;
+            transition: all 0.2s ease;
+            animation: pulse 1s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .game-click-btn:active {
+            transform: scale(0.95);
+        }
+
+        /* Collapsible */
+        .collapse-container {
+            margin-top: 20px;
+        }
+
+        .collapse-item {
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            margin-bottom: 12px;
+            overflow: hidden;
+        }
+
+        .collapse-header {
+            width: 100%;
+            background: var(--bg-color);
+            border: none;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text-color);
+            transition: all 0.3s ease;
+        }
+
+        .collapse-header:hover {
+            background: var(--secondary-color);
+            color: white;
+        }
+
+        .collapse-arrow {
+            transition: transform 0.3s ease;
+        }
+
+        .collapse-item.active .collapse-arrow {
+            transform: rotate(180deg);
+        }
+
+        .collapse-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            background: var(--card-bg);
+        }
+
+        .collapse-item.active .collapse-content {
+            max-height: 500px;
+        }
+
+        .collapse-content p {
+            padding: 16px 20px;
+            color: var(--text-muted);
+        }
