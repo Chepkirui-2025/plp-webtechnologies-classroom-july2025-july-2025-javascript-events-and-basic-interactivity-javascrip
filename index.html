@@ -121,6 +121,115 @@
                         <button id="game-click" class="game-click-btn" style="display: none;">CLICK!</button>
                     </div>
                 </div>
+                <!-- Tab Content 3: Collapsible Sections -->
+                <div class="tab-content" id="tab3">
+                    <h3>Collapsible Information Panels</h3>
+                    <div class="collapse-container">
+                        <div class="collapse-item">
+                            <button class="collapse-header">
+                                <span>JavaScript Basics</span>
+                                <span class="collapse-arrow">▼</span>
+                            </button>
+                            <div class="collapse-content">
+                                <p>JavaScript is a versatile programming language that runs in web browsers. It enables dynamic content, interactive features, and modern web applications.</p>
+                            </div>
+                        </div>
+                        <div class="collapse-item">
+                            <button class="collapse-header">
+                                <span>CSS Styling</span>
+                                <span class="collapse-arrow">▼</span>
+                            </button>
+                            <div class="collapse-content">
+                                <p>CSS controls the visual presentation of web pages. It defines colors, layouts, fonts, animations, and responsive designs that adapt to different screen sizes.</p>
+                            </div>
+                        </div>
+                        <div class="collapse-item">
+                            <button class="collapse-header">
+                                <span>HTML Structure</span>
+                                <span class="collapse-arrow">▼</span>
+                            </button>
+                            <div class="collapse-content">
+                                <p>HTML provides the semantic structure for web content. It uses tags to define headings, paragraphs, links, images, and other elements that make up a webpage.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Part 3: Form Validation -->
+        <section class="section form-section">
+            <h2>📋 Registration Form</h2>
+            <p class="form-intro">Complete all fields to create your account</p>
+
+            <form id="registration-form" class="registration-form" novalidate>
+                <!-- Full Name -->
+                <div class="form-group">
+                    <label for="fullname">Full Name</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="John Doe">
+                    <span class="error-message" id="fullname-error"></span>
+                </div>
+
+                <!-- Email -->
+                <div class="form-group">
+                    <label for="email">Email Address</label>
+                    <input type="email" id="email" name="email" placeholder="john@example.com">
+                    <span class="error-message" id="email-error"></span>
+                </div>
+
+                <!-- Username -->
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" placeholder="johndoe123">
+                    <span class="error-message" id="username-error"></span>
+                    <span class="field-hint">3-20 characters, letters and numbers only</span>
+                </div>
+
+                <!-- Password -->
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-wrapper">
+                        <input type="password" id="password" name="password" placeholder="••••••••">
+                        <button type="button" class="toggle-password" id="toggle-password">👁️</button>
+                    </div>
+                    <span class="error-message" id="password-error"></span>
+                    <span class="field-hint">Minimum 8 characters, include uppercase, lowercase, and number</span>
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="form-group">
+                    <label for="confirm-password">Confirm Password</label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="••••••••">
+                    <span class="error-message" id="confirm-password-error"></span>
+                </div>
+
+                <!-- Phone Number -->
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+1 (555) 123-4567">
+                    <span class="error-message" id="phone-error"></span>
+                    <span class="field-hint">Format: +1 (XXX) XXX-XXXX</span>
+                </div>
+
+                <!-- Terms Checkbox -->
+                <div class="form-group checkbox-group">
+                    <input type="checkbox" id="terms" name="terms">
+                    <label for="terms" class="checkbox-label">I agree to the Terms and Conditions</label>
+                    <span class="error-message" id="terms-error"></span>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn">Create Account</button>
+            </form>
+
+            <!-- Success Message -->
+            <div id="success-message" class="success-message" style="display: none;">
+                <h3>✅ Registration Successful!</h3>
+                <p>Your account has been created. Welcome aboard!</p>
+            </div>
+        </section>
+    </div>
+
 
     
 </body>
