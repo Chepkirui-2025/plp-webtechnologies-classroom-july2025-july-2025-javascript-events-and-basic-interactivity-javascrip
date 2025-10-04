@@ -191,3 +191,250 @@
                 collapseItem.classList.toggle('active');
             });
         });
+
+        // ============================================
+        // PART 3: FORM VALIDATION
+        // ============================================
+
+        const registrationForm = document.getElementById('registration-form');
+        const successMessage = document.getElementById('success-message');
+
+        // Form field references
+        const fullnameInput = document.getElementById('fullname');
+        const emailInput = document.getElementById('email');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const confirmPasswordInput = document.getElementById('confirm-password');
+        const phoneInput = document.getElementById('phone');
+        const termsCheckbox = document.getElementById('terms');
+
+        // Error message references
+        const fullnameError = document.getElementById('fullname-error');
+        const emailError = document.getElementById('email-error');
+        const usernameError = document.getElementById('username-error');
+        const passwordError = document.getElementById('password-error');
+        const confirmPasswordError = document.getElementById('confirm-password-error');
+        const phoneError = document.getElementById('phone-error');
+        const termsError = document.getElementById('terms-error');
+
+        // Password visibility toggle
+        const togglePasswordBtn = document.getElementById('toggle-password');
+        
+        togglePasswordBtn.addEventListener('click', function() {
+            const type = passwordInput.getAttribute('type');
+            
+            if (type === 'password') {
+                passwordInput.setAttribute('type', 'text');
+                this.textContent = '🙈';
+            } else {
+                passwordInput.setAttribute('type', 'password');
+                this.textContent = '👁️';
+            }
+        });
+
+        // Real-time validation on input (blur event)
+        fullnameInput.addEventListener('blur', validateFullName);
+        emailInput.addEventListener('blur', validateEmail);
+        usernameInput.addEventListener('blur', validateUsername);
+        passwordInput.addEventListener('blur', validatePassword);
+        confirmPasswordInput.addEventListener('blur', validateConfirmPassword);
+        phoneInput.addEventListener('blur', validatePhone);
+
+        // Also validate confirm password when main password changes
+        passwordInput.addEventListener('input', function() {
+            if (confirmPasswordInput.value) {
+                validateConfirmPassword();
+            }
+        });
+
+        // Validation Functions
+
+        function validateFullName() {
+            const value = fullnameInput.value.trim();
+            
+            if (value === '') {
+                showError(fullnameInput, fullnameError, 'Full name is required');
+                return false;
+            } else if (value.length < 2) {
+                showError(fullnameInput, fullnameError, 'Name must be at least 2 characters');
+                return false;
+            } else if (!/^[a-zA-Z\s]+$/.test(value)) {
+                showError(fullnameInput, fullnameError, 'Name can only contain letters and spaces');
+                return false;
+            } else {
+                showSuccess(fullnameInput, fullnameError);
+                return true;
+            }
+        }
+
+        function validateEmail() {
+            const value = emailInput.value.trim();
+            // Regular expression for email validation
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (value === '') {
+                showError(emailInput, emailError, 'Email address is required');
+                return false;
+            } else if (!emailRegex.test(value)) {
+                showError(emailInput, emailError, 'Please enter a valid email address');
+                return false;
+            } else {
+                showSuccess(emailInput, emailError);
+                return true;
+            }
+        }
+
+        function validateUsername() {
+            const value = usernameInput.value.trim();
+            // Username: 3-20 characters, alphanumeric only
+            const usernameRegex = /^[a-zA-Z0-9]{3,20}$/;
+            
+            if (value === '') {
+                showError(usernameInput, usernameError, 'Username is required');
+                return false;
+            } else if (!usernameRegex.test(value)) {
+                showError(usernameInput, usernameError, 'Username must be 3-20 characters, letters and numbers only');
+                return false;
+            } else {
+                showSuccess(usernameInput, usernameError);
+                return true;
+            }
+        }
+
+        function validatePassword() {
+            const value = passwordInput.value;
+            
+            if (value === '') {
+                showError(passwordInput, passwordError, 'Password is required');
+                return false;
+            } else if (value.length < 8) {
+                showError(passwordInput, passwordError, 'Password must be at least 8 characters');
+                return false;
+            } else if (!/[A-Z]/.test(value)) {
+                showError(passwordInput, passwordError, 'Password must contain at least one uppercase letter');
+                return false;
+            } else if (!/[a-z]/.test(value)) {
+                showError(passwordInput, passwordError, 'Password must contain at least one lowercase letter');
+                return false;
+            } else if (!/[0-9]/.test(value)) {
+                showError(passwordInput, passwordError, 'Password must contain at least one number');
+                return false;
+            } else {
+                showSuccess(passwordInput, passwordError);
+                return true;
+            }
+        }
+
+        function validateConfirmPassword() {
+            const password = passwordInput.value;
+            const confirmPassword = confirmPasswordInput.value;
+            
+            if (confirmPassword === '') {
+                showError(confirmPasswordInput, confirmPasswordError, 'Please confirm your password');
+                return false;
+            } else if (password !== confirmPassword) {
+                showError(confirmPasswordInput, confirmPasswordError, 'Passwords do not match');
+                return false;
+            } else {
+                showSuccess(confirmPasswordInput, confirmPasswordError);
+                return true;
+            }
+        }
+
+        function validatePhone() {
+            const value = phoneInput.value.trim();
+            // Phone format: +1 (XXX) XXX-XXXX
+            const phoneRegex = /^\+1\s\(\d{3}\)\s\d{3}-\d{4}$/;
+            
+            if (value === '') {
+                showError(phoneInput, phoneError, 'Phone number is required');
+                return false;
+            } else if (!phoneRegex.test(value)) {
+                showError(phoneInput, phoneError, 'Phone must match format: +1 (XXX) XXX-XXXX');
+                return false;
+            } else {
+                showSuccess(phoneInput, phoneError);
+                return true;
+            }
+        }
+
+        function validateTerms() {
+            if (!termsCheckbox.checked) {
+                termsError.textContent = 'You must agree to the terms and conditions';
+                return false;
+            } else {
+                termsError.textContent = '';
+                return true;
+            }
+        }
+
+        // Helper functions to show error/success states
+        function showError(input, errorElement, message) {
+            input.classList.add('error');
+            input.classList.remove('valid');
+            errorElement.textContent = message;
+        }
+
+        function showSuccess(input, errorElement) {
+            input.classList.remove('error');
+            input.classList.add('valid');
+            errorElement.textContent = '';
+        }
+
+        // Form submission handler
+        registrationForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent default form submission
+            
+            // Validate all fields
+            const isFullNameValid = validateFullName();
+            const isEmailValid = validateEmail();
+            const isUsernameValid = validateUsername();
+            const isPasswordValid = validatePassword();
+            const isConfirmPasswordValid = validateConfirmPassword();
+            const isPhoneValid = validatePhone();
+            const areTermsValid = validateTerms();
+            
+            // Check if all validations passed
+            const isFormValid = isFullNameValid && isEmailValid && isUsernameValid && 
+                               isPasswordValid && isConfirmPasswordValid && isPhoneValid && 
+                               areTermsValid;
+            
+            if (isFormValid) {
+                // Hide form and show success message
+                registrationForm.style.display = 'none';
+                successMessage.style.display = 'block';
+                
+                // Scroll to success message
+                successMessage.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                // Log form data (in real application, this would be sent to server)
+                console.log('Form submitted successfully!');
+                console.log({
+                    fullname: fullnameInput.value,
+                    email: emailInput.value,
+                    username: usernameInput.value,
+                    phone: phoneInput.value,
+                    terms: termsCheckbox.checked
+                });
+                
+                // Reset form after 5 seconds (optional)
+                setTimeout(() => {
+                    registrationForm.reset();
+                    registrationForm.style.display = 'block';
+                    successMessage.style.display = 'none';
+                    
+                    // Remove validation classes
+                    const inputs = registrationForm.querySelectorAll('input');
+                    inputs.forEach(input => {
+                        input.classList.remove('error', 'valid');
+                    });
+                }, 5000);
+            } else {
+                // Scroll to first error
+                const firstError = registrationForm.querySelector('.error');
+                if (firstError) {
+                    firstError.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        });
+
