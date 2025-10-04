@@ -84,3 +84,110 @@
                 themeIcon.textContent = '🌙';
             }
         });
+
+        // ============================================
+        // PART 2: INTERACTIVE COMPONENTS
+        // ============================================
+
+        // Tabbed Interface - Switches between different content sections
+        const tabButtons = document.querySelectorAll('.tab-btn');
+        const tabContents = document.querySelectorAll('.tab-content');
+
+        tabButtons.forEach(button => {
+            button.addEventListener('click', function() {
+                const targetTab = this.getAttribute('data-tab');
+                
+                // Remove active class from all tabs and buttons
+                tabButtons.forEach(btn => btn.classList.remove('active'));
+                tabContents.forEach(content => content.classList.remove('active'));
+                
+                // Add active class to clicked button and corresponding content
+                this.classList.add('active');
+                document.getElementById(targetTab).classList.add('active');
+            });
+        });
+
+        // FAQ Accordion - Collapsible question/answer sections
+        const faqQuestions = document.querySelectorAll('.faq-question');
+
+        faqQuestions.forEach(question => {
+            question.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                
+                // Toggle active state - allows one or multiple items open
+                faqItem.classList.toggle('active');
+            });
+        });
+
+        // Reaction Time Game - Interactive button clicking game
+        let gameScore = 0;
+        let gameTimer = 10;
+        let gameInterval;
+        let highScore = 0;
+
+        const gameStartBtn = document.getElementById('game-start');
+        const gameClickBtn = document.getElementById('game-click');
+        const gameScoreDisplay = document.getElementById('game-score');
+        const gameTimerDisplay = document.getElementById('game-timer');
+        const highScoreDisplay = document.getElementById('high-score');
+
+        gameStartBtn.addEventListener('click', function() {
+            // Reset game state
+            gameScore = 0;
+            gameTimer = 10;
+            gameScoreDisplay.textContent = gameScore;
+            gameTimerDisplay.textContent = gameTimer;
+            
+            // Show game button and hide start button
+            gameStartBtn.style.display = 'none';
+            gameClickBtn.style.display = 'block';
+            
+            // Start countdown timer
+            gameInterval = setInterval(() => {
+                gameTimer--;
+                gameTimerDisplay.textContent = gameTimer;
+                
+                // End game when timer reaches 0
+                if (gameTimer === 0) {
+                    endGame();
+                }
+            }, 1000);
+        });
+
+        gameClickBtn.addEventListener('click', function() {
+            gameScore++;
+            gameScoreDisplay.textContent = gameScore;
+            
+            // Visual feedback on click
+            this.style.transform = 'scale(0.9)';
+            setTimeout(() => {
+                this.style.transform = 'scale(1)';
+            }, 100);
+        });
+
+        function endGame() {
+            clearInterval(gameInterval);
+            gameClickBtn.style.display = 'none';
+            gameStartBtn.style.display = 'block';
+            
+            // Update high score if current score is higher
+            if (gameScore > highScore) {
+                highScore = gameScore;
+                highScoreDisplay.textContent = highScore;
+            }
+            
+            // Show game over message
+            alert(`Game Over! Your score: ${gameScore}\nHigh Score: ${highScore}`);
+        }
+
+        // Collapsible Panels - Show/hide information sections
+        const collapseHeaders = document.querySelectorAll('.collapse-header');
+
+        collapseHeaders.forEach(header => {
+            header.addEventListener('click', function() {
+                const collapseItem = this.parentElement;
+                
+                // Toggle the active state for smooth animation
+                collapseItem.classList.toggle('active');
+            });
+        });
